@@ -29,6 +29,6 @@ public class UserCartItem {
     public UserCartItem() {
 
     }
-
+    public
 
 }
