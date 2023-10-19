@@ -62,5 +62,13 @@ public class UserCartItem {
         this.customFragrance = customFragrance;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserCartItem{" +
+                "id=" + id +
+                ", user=" + user +
+                ", perfume=" + perfume +
+                ", customFragrance=" + customFragrance +
+                '}';
+    }
 }
