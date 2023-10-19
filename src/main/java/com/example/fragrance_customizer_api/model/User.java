@@ -1,7 +1,10 @@
 package com.example.fragrance_customizer_api.model;
 
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,6 +33,10 @@ public class User {
         this.emailAddress=emailAddress;
         this.password=password;
     }
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserCartItem> userCartItemLists = new ArrayList<>();
 
     public User() {
 
