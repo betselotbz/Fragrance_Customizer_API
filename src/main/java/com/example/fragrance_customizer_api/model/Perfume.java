@@ -11,21 +11,25 @@ public class Perfume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String name;
-    @Column (nullable = false)
-    private String Family;
-    @Column (nullable = false)
-    private String Notes;
-    @Column (nullable = false)
-    private String Image;
+    @Column(nullable = false)
+    private String family;
+    @Column(nullable = false)
+    private String notes;
+    @Column(nullable = false)
+    private String image;
+
+    public Perfume() {
+
+    }
 
     public Perfume(Long id, String name, String family, String notes, String image) {
         this.id = id;
         this.name = name;
-        Family = family;
-        Notes = notes;
-        Image = image;
+        this.family = family;
+        this.notes = notes;
+        this.image = image;
     }
 
     public Long getId() {
@@ -45,26 +49,37 @@ public class Perfume {
     }
 
     public String getFamily() {
-        return Family;
+        return family;
     }
 
     public void setFamily(String family) {
-        Family = family;
+        this.family = family;
     }
 
     public String getNotes() {
-        return Notes;
+        return notes;
     }
 
     public void setNotes(String notes) {
-        Notes = notes;
+        this.notes = notes;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(String image) {
-        Image = image;
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Perfume{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", family='" + family + '\'' +
+                ", notes='" + notes + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }
