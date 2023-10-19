@@ -29,6 +29,38 @@ public class UserCartItem {
     public UserCartItem() {
 
     }
-    public
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Perfume getPerfume() {
+        return perfume;
+    }
+
+    public void setPerfume(Perfume perfume) {
+        this.perfume = perfume;
+    }
+
+    public CustomFragrance getCustomFragrance() {
+        return customFragrance;
+    }
+
+    public void setCustomFragrance(CustomFragrance customFragrance) {
+        this.customFragrance = customFragrance;
+    }
+
 
 }
