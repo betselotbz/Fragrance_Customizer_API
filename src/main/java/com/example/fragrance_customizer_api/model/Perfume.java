@@ -1,6 +1,11 @@
 package com.example.fragrance_customizer_api.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "perfumes")
@@ -31,6 +36,10 @@ public class Perfume {
         this.notes = notes;
         this.image = image;
     }
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserCartItem> userCartItemLists = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -70,6 +79,12 @@ public class Perfume {
 
     public void setImage(String image) {
         this.image = image;
+    }
+    public List<UserCartItem> getUserCartItemLists() {
+        return userCartItemLists;
+    }
+    public void setUserCartItemLists(List<UserCartItem> userCartItemLists) {
+        this.userCartItemLists = userCartItemLists;
     }
 
     @Override

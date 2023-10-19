@@ -38,8 +38,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<UserCartItem> userCartItemLists = new ArrayList<>();
-
+    private List<UserCartItem> userCartItems = new ArrayList<>();
 
 
     public Long getId() {
@@ -72,6 +71,12 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public List<UserCartItem> getUserCartItems() {
+        return userCartItems;
+    }
+    public void setUserCartItems(List<UserCartItem> userCartItems) {
+        this.userCartItems = userCartItems;
     }
 
     @Override
