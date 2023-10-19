@@ -20,4 +20,15 @@ public class UserCartItem {
     @JoinColumn(name = "custom_fg_id")
     private CustomFragrance customFragrance;
 
+    public UserCartItem(Long id, User user, Perfume perfume, CustomFragrance customFragrance ){
+        this.id = id;
+        this.user = user;
+        this.perfume = perfume;
+        this.customFragrance = customFragrance;
+    }
+    public UserCartItem() {
+
+    }
+
+
 }
