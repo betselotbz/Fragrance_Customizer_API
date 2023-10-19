@@ -19,4 +19,6 @@ public class User {
     @Column
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // ensure that the password is not accidentally exposed in the JSON representation of the object
     private String passWord;
+
+
 }
