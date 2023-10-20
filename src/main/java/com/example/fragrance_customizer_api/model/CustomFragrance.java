@@ -14,9 +14,6 @@ public class CustomFragrance {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_cart_item_id")
-    private UserCartItem userCartItem;
     @Column
     private String family;
     @Column
@@ -28,9 +25,8 @@ public class CustomFragrance {
     public CustomFragrance() {
 
     }
-    public CustomFragrance(Long id, UserCartItem userCartItem, String family, String notes, List<UserCartItem> userCartItemLists) {
+    public CustomFragrance(Long id, String family, String notes, List<UserCartItem> userCartItemLists) {
         this.id = id;
-        this.userCartItem = userCartItem;
         this.family = family;
         this.notes = notes;
         this.userCartItemLists = userCartItemLists;
@@ -44,14 +40,6 @@ public class CustomFragrance {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UserCartItem getUserCartItem() {
-        return userCartItem;
-    }
-
-    public void setUserCartItem(UserCartItem userCartItem) {
-        this.userCartItem = userCartItem;
     }
 
     public String getFamily() {
@@ -82,7 +70,6 @@ public class CustomFragrance {
     public String toString() {
         return "CustomFragrance{" +
                 "id=" + id +
-                ", userCartItem=" + userCartItem +
                 ", family='" + family + '\'' +
                 ", notes='" + notes + '\'' +
                 ", userCartItemLists=" + userCartItemLists +
