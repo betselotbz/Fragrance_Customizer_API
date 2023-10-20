@@ -36,10 +36,8 @@ public class Perfume {
         this.notes = notes;
         this.image = image;
     }
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<UserCartItem> userCartItemLists = new ArrayList<>();
-
+    @OneToMany(mappedBy = "perfume", cascade = CascadeType.ALL)
+    private List<UserCartItem> userCartItems = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -80,11 +78,13 @@ public class Perfume {
     public void setImage(String image) {
         this.image = image;
     }
-    public List<UserCartItem> getUserCartItemLists() {
-        return userCartItemLists;
+
+    public List<UserCartItem> getUserCartItems() {
+        return userCartItems;
     }
-    public void setUserCartItemLists(List<UserCartItem> userCartItemLists) {
-        this.userCartItemLists = userCartItemLists;
+
+    public void setUserCartItems(List<UserCartItem> userCartItems) {
+        this.userCartItems = userCartItems;
     }
 
     @Override

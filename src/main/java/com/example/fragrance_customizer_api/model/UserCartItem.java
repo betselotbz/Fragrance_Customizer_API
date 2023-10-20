@@ -17,7 +17,7 @@ public class UserCartItem {
     private Perfume perfume;
 
     @ManyToOne
-    @JoinColumn(name = "custom_fg_id")
+    @JoinColumn(name = "custom_fragrance_id")
     private CustomFragrance customFragrance;
 
     public UserCartItem() {
