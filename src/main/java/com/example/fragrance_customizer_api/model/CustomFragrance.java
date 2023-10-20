@@ -18,7 +18,7 @@ public class CustomFragrance {
     private String family;
     @Column
     private String notes;
-    @OneToMany(mappedBy = "customFragrance", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customFragrance_id", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserCartItem> userCartItemLists = new ArrayList<>();
 

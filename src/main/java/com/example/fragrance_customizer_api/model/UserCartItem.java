@@ -17,18 +17,17 @@ public class UserCartItem {
     private Perfume perfume;
 
     @ManyToOne
-    @JoinColumn(name = "custom_fragrance_id")
+    @JoinColumn(name = "customFragrance_id")
     private CustomFragrance customFragrance;
 
     public UserCartItem() {
 
     }
 
-    public UserCartItem(Long id, User user, Perfume perfume, CustomFragrance customFragrance ){
+    public UserCartItem(Long id, User user, Perfume perfume){
         this.id = id;
         this.user = user;
         this.perfume = perfume;
-        this.customFragrance = customFragrance;
     }
 
     public Long getId() {
