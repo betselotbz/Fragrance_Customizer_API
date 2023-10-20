@@ -36,7 +36,7 @@ public class User {
         this.password=password;
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserCartItem> userCartItems = new ArrayList<>();
 
