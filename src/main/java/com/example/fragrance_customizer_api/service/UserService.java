@@ -3,7 +3,9 @@ package com.example.fragrance_customizer_api.service;
 import com.example.fragrance_customizer_api.exception.InformationExistException;
 import com.example.fragrance_customizer_api.model.User;
 import com.example.fragrance_customizer_api.repository.UserRepository;
+import com.example.fragrance_customizer_api.security.JWTUtils;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -11,10 +13,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JWTUtils jwtUtils;
+    private final AuthenticationManager authenticationManager;
 
-    public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder, JWTUtils jwtUtils,
+                       @Lazy AuthenticationManager authenticationManager, AuthenticationManager authenticationManager1){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtils = jwtUtils;
+        this.authenticationManager = authenticationManager1;
     }
     public User createUser(User userObject) {
         if (userObject == null) {
