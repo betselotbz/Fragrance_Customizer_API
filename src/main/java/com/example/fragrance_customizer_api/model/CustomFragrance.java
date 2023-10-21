@@ -18,7 +18,7 @@ public class CustomFragrance {
     private String family;
     @Column
     private String notes;
-    @OneToMany(mappedBy = "customFragrance_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customFragrance", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UserCartItem> userCartItemLists = new ArrayList<>();
 
@@ -31,8 +31,6 @@ public class CustomFragrance {
         this.notes = notes;
         this.userCartItemLists = userCartItemLists;
     }
-    @OneToMany(mappedBy = "custom_fragrance", cascade = CascadeType.ALL)
-    private List<UserCartItem> userCartItems = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -73,7 +71,6 @@ public class CustomFragrance {
                 ", family='" + family + '\'' +
                 ", notes='" + notes + '\'' +
                 ", userCartItemLists=" + userCartItemLists +
-                ", userCartItems=" + userCartItems +
                 '}';
     }
 }

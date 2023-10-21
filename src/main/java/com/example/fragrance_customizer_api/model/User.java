@@ -26,6 +26,10 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // ensure that the password is not accidentally exposed in the JSON representation of the object
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserCartItem> userCartItems = new ArrayList<>();
+
     public User() {
 
     }
@@ -35,11 +39,6 @@ public class User {
         this.emailAddress=emailAddress;
         this.password=password;
     }
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<UserCartItem> userCartItems = new ArrayList<>();
-
 
     public Long getId() {
         return id;
