@@ -15,6 +15,7 @@ public class JWTUtils {
     @Value("${jwt-expiration-ms}")
     private int jwtExpMs;
 
+    // one time only when user login
     public String generateJwtToken(MyUserDetails myUserDetails) {
         return Jwts.builder()
                 .setSubject((myUserDetails.getUsername())) // just the user email
@@ -22,5 +23,10 @@ public class JWTUtils {
                 .setExpiration(new Date((new Date()).getTime() + jwtExpMs))
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
+    }
+
+    // For every single request
+    public String getUserNameFromJwtToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
