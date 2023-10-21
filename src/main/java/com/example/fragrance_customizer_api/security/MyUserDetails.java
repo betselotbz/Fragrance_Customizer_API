@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.HashSet;
 
-//To get Information about the User
+//To get Information about the User (if credential is expired, etc.. )
 public class MyUserDetails  implements UserDetails {
     private final User user;
 
