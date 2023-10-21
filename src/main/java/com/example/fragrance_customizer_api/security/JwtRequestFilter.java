@@ -15,5 +15,9 @@ import java.util.logging.Logger;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
     Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+    }
 
     }
