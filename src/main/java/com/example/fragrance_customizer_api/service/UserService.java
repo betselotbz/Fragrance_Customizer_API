@@ -2,12 +2,18 @@ package com.example.fragrance_customizer_api.service;
 
 import com.example.fragrance_customizer_api.exception.InformationExistException;
 import com.example.fragrance_customizer_api.model.User;
+import com.example.fragrance_customizer_api.model.request.LoginRequest;
 import com.example.fragrance_customizer_api.repository.UserRepository;
 import com.example.fragrance_customizer_api.security.JWTUtils;
+import com.example.fragrance_customizer_api.security.MyUserDetails;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Optional;
 
 
 public class UserService {
@@ -36,6 +42,17 @@ public class UserService {
         } else {
             // Throw an exception if the email address is already in use
             throw new InformationExistException("User with email address " + userObject.getEmailAddress() + " already exists");
+        }
+    }
+    public Optional<String> loginUser(LoginRequest loginRequest){
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequest.getEmailAddress(), loginRequest.getPassword());
+        try{
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            MyUserDetails myUserDetails =  (MyUserDetails) authentication.getPrincipal();
+            return Optional.of(jwtUtils.generateJwtToken(myUserDetails));
+        }catch (Exception e){
+            return Optional.empty();
         }
     }
     public User findUserByEmailAddress(String emailAddress) {
