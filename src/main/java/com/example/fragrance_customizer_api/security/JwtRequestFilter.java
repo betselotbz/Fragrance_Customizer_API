@@ -1,5 +1,6 @@
 package com.example.fragrance_customizer_api.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,14 @@ import java.util.logging.Logger;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
     Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
+
+    private MyUserDetailsService myUserDetailsService;
+
+    @Autowired
+    public void setMyUserDetailsService(MyUserDetailsService myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
