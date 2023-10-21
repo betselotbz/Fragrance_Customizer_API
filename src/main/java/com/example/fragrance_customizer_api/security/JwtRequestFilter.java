@@ -18,10 +18,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     Logger logger = Logger.getLogger(JwtRequestFilter.class.getName());
 
     private MyUserDetailsService myUserDetailsService;
+    private JWTUtils jwtUtils;
 
     @Autowired
     public void setMyUserDetailsService(MyUserDetailsService myUserDetailsService) {
         this.myUserDetailsService = myUserDetailsService;
+    }
+    @Autowired
+    public void setJwtUtils(JWTUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
     }
 
     @Override
