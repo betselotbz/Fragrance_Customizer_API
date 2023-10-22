@@ -21,6 +21,7 @@ public class UserCartItemTestDefs {
     private static final String Base_URL = "http://localhost:";
     private static Response response;
     private String token;
+    private static RequestSpecification request;
 
 
     @LocalServerPort
@@ -63,7 +64,15 @@ public class UserCartItemTestDefs {
 
                 token = getJWTKey(port);
             }
+            RestAssured.baseURI = BASE_URL;
+            request = RestAssured.given();
+            request.header("Content-Type", "application/json");
+            request.header("Authorization", "Bearer " + token);
 
+        }catch (JSONException e) {
+            logger.info("Json issue " + e.getMessage());
+        }
+    }
 
             @Given("a user with ID {int} exists")
             public void aUserWithIDExists ( int userId){
