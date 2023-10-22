@@ -6,6 +6,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +36,14 @@ public class UserCartItemTestDefs {
 
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given();
+
+        // Set the content-type header to indicate JSON data
+        request.header("Content-Type", "application/json");
+
+        // Create a JSON request body with user email and password
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("emailAddress", "bethel@ga.com");
+        requestBody.put("password", "bethel123");
     }
 
 
