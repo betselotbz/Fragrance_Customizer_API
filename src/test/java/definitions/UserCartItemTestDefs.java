@@ -4,6 +4,7 @@ import com.example.fragrance_customizer_api.FragranceCustomizerApiApplication;
 import io.cucumber.java.en.Given;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +16,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FragranceCustomizerApiApplication.class)
 public class UserCartItemTestDefs {
-
+    private static Response response;
     private static final String BASE_URL = "http://localhost:";
     private final Logger logger = LoggerFactory.getLogger(UserCartItemTestDefs.class);
     private static final String Base_URL = "http://localhost:";
@@ -44,6 +45,12 @@ public class UserCartItemTestDefs {
         JSONObject requestBody = new JSONObject();
         requestBody.put("emailAddress", "bethel@ga.com");
         requestBody.put("password", "bethel123");
+
+        // Send a POST request to the authentication endpoint
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/users/login/");
+
+        // Extract and return the JWT key from the authentication response
+        return response.jsonPath().getString("jwt");
     }
 
 
