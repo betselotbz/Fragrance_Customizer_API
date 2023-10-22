@@ -16,13 +16,16 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FragranceCustomizerApiApplication.class)
 public class UserCartItemTestDefs {
-    private static Response response;
     private static final String BASE_URL = "http://localhost:";
     private final Logger logger = LoggerFactory.getLogger(UserCartItemTestDefs.class);
     private static final String Base_URL = "http://localhost:";
+    private static Response response;
+    private String token;
+
 
     @LocalServerPort
     String port;
+
     /**
      * Retrieves a JWT (JSON Web Token) key by sending a POST request to the authentication endpoint.
      * This method sets up the necessary HTTP request with user credentials and sends it to the
@@ -53,10 +56,18 @@ public class UserCartItemTestDefs {
         return response.jsonPath().getString("jwt");
     }
 
+    public void createRequest() throws JSONException {
+        try {
+            System.out.println(token);
+            if (token == null) {
 
-    @Given("a user with ID {int} exists")
-    public void aUserWithIDExists(int userId) {
+                token = getJWTKey(port);
+            }
 
 
-    }
-}
+            @Given("a user with ID {int} exists")
+            public void aUserWithIDExists ( int userId){
+
+
+            }
+        }
