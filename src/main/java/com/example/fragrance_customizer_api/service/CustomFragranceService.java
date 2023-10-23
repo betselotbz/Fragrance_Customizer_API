@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomFragranceService {
@@ -16,5 +17,13 @@ public class CustomFragranceService {
     public void setCustomFragranceRepository(CustomFragranceRepository customFragranceRepository) {
         this.customFragranceRepository = customFragranceRepository;
     }
+    public CustomFragranceService(List<CustomFragrance> customFragranceList) {this.customFragranceList = customFragranceList;}
 
+    public List<CustomFragrance> getAllCustomFragrance() {return customFragranceRepository.findAll();}
+
+    public Optional<Optional<CustomFragrance>> getCustomFragranceByNotes(String notes) { return Optional.ofNullable(customFragranceRepository.findByNotes(notes));}
+    public Optional<Optional<CustomFragrance>> getCustomFragranceByFamily(String family) { return Optional.ofNullable(customFragranceRepository.findByFamily(family));}
+    public Optional<CustomFragrance> getCustomFragranceById(Long Id) {
+        return customFragranceRepository.findById(Id);
+    }
 }
