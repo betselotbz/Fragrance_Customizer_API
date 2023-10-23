@@ -40,7 +40,7 @@ public class UserCartItemService {
         }
         throw new InformationNotFoundException("UserCartItem with Id " + itemId+ " not found");
     }
-    public UserCartItem deleteItem(Long itemId) {
+    public UserCartItem deleteItemById(Long itemId) {
         User currentUser = getCurrentLoggedInUser();
         Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findByIdAndUser(itemId, currentUser);
         if (optionalUserCartItem.isPresent()) {
@@ -51,6 +51,7 @@ public class UserCartItemService {
             throw new InformationNotFoundException("You don't have an item with Id " + itemId);
         }
     }
+
 
 }
 

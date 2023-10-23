@@ -6,10 +6,7 @@ import com.example.fragrance_customizer_api.service.UserCartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,4 +45,19 @@ public class UserCartItemController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping ("/{itemId}")
+    public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
+        UserCartItem deletedItem = userCartItemService.deleteItemById(itemId);
+        if (deletedItem != null) { //.isPresent
+            response.put("data", deletedItem);
+            response.put("message", "Success");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("data", null);
+            response.put("message", "Not Found");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
