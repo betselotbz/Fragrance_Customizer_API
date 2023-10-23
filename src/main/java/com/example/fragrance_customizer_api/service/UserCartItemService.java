@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserCartItemService {
@@ -25,9 +26,14 @@ public class UserCartItemService {
         return myUserDetails.getUser();
 
     }
+    //To get all items in User Cart
     public List<UserCartItem> getAllItemsForCurrentUser() {
         User currentUser = getCurrentLoggedInUser();
         return userCartItemRepository.findByUser(currentUser);
+    }
+    //To get a specific item in User Cart
+    public Optional<UserCartItem> getItemById(Long itemId){
+        return userCartItemRepository.findById(itemId);
     }
 
 
