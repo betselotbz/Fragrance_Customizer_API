@@ -1,6 +1,5 @@
 package com.example.fragrance_customizer_api.service;
 
-import com.example.fragrance_customizer_api.exception.InformationExistException;
 import com.example.fragrance_customizer_api.exception.InformationNotFoundException;
 import com.example.fragrance_customizer_api.model.User;
 import com.example.fragrance_customizer_api.model.UserCartItem;
