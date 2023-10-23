@@ -25,8 +25,10 @@ public class UserCartItemService {
         return myUserDetails.getUser();
 
     }
-    public List<UserCartItem> getAllItems() {
-        return userCartItemRepository.findAll();
+    public List<UserCartItem> getAllItemsForCurrentUser() {
+        User currentUser = getCurrentLoggedInUser();
+        return userCartItemRepository.findByUser(currentUser);
     }
+
 
 }
