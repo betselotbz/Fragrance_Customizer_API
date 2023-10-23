@@ -39,4 +39,18 @@ public class CustomFragranceController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomFragranceById(@PathVariable Long id) {
+        Optional<CustomFragrance> optionalCustomFragrance = customFragranceService.getCustomFragranceById(id);
+        HashMap<String, Object> message = new HashMap<>();
+        if (optionalCustomFragrance.isPresent()) {
+            CustomFragrance customFragrance = optionalCustomFragrance.get();
+            message.put("message", "Success");
+            message.put("data", optionalCustomFragrance.get());
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            message.put("message", "Cannot find any custom fragrance with the given ID.");
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
 }
