@@ -9,5 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/custom-fragrance")
 public class CustomFragranceController {
+    private final CustomFragranceService customFragranceService;
 
+    @Autowired
+    public CustomFragranceController(CustomFragranceService customFragranceService) {
+        this.customFragranceService = customFragranceService;
+    }
 }
