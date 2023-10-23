@@ -34,8 +34,7 @@ public class UserCartItemService {
     }
     //To get a specific item in User Cart
     public Optional<UserCartItem> getItemById(Long itemId){
-        User curretUser = getCurrentLoggedInUser();
-        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId, curretUser);
+        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId);
         if(optionalUserCartItem.isPresent()) {
             return optionalUserCartItem;
         }
