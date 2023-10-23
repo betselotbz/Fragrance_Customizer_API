@@ -23,8 +23,9 @@ public class PerfumeService {
     public Optional<Perfume> getPerfumesByFamily(String family) {
         return perfumeRepository.findByFamily(family);
     }
-    
-    
-    
+    public Optional<Perfume> getPerfumesById(Long Id) {
+        return perfumeRepository.findById(Id);
+    }
+
 }
 

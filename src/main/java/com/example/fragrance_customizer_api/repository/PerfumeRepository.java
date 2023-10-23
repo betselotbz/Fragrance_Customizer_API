@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface PerfumeRepository extends JpaRepository<Perfume, Long> {
     Optional<Perfume> findByFamily(String family);
+    Optional<Perfume> findById(Long Id);
+    List<Perfume> findAll();
 }
