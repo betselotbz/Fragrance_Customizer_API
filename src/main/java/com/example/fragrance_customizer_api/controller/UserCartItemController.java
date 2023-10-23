@@ -32,7 +32,7 @@ public class UserCartItemController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{itemId)")
+    @GetMapping("/{itemId}")
     public ResponseEntity<?> getItemById(@PathVariable Long itemId) {
         Optional<UserCartItem> userCartItem = userCartItemService.getItemById(itemId);
         if (userCartItem.isPresent()) {
