@@ -21,8 +21,8 @@ public class CustomFragranceService {
 
     public List<CustomFragrance> getAllCustomFragrance() {return customFragranceRepository.findAll();}
 
-    public Optional<Optional<CustomFragrance>> getCustomFragranceByNotes(String notes) { return Optional.ofNullable(customFragranceRepository.findByNotes(notes));}
-    public Optional<Optional<CustomFragrance>> getCustomFragranceByFamily(String family) { return Optional.ofNullable(customFragranceRepository.findByFamily(family));}
+    public Optional<CustomFragrance> getCustomFragranceByNotes(String notes) { return customFragranceRepository.findByNotes(notes);}
+    public Optional<CustomFragrance> getCustomFragranceByFamily(String family) { return customFragranceRepository.findByFamily(family);}
     public Optional<CustomFragrance> getCustomFragranceById(Long Id) {
         return customFragranceRepository.findById(Id);
     }

@@ -55,7 +55,7 @@ public class PerfumeController {
         }
     }
     @GetMapping("/{family}")
-    public ResponseEntity<?> getIPerfumesByFamily(@PathVariable String family) {
+    public ResponseEntity<?> getPerfumesByFamily(@PathVariable String family) {
         Optional<Perfume> optionalPerfume = perfumeService.getPerfumesByFamily(family);
         HashMap<String, Object> message = new HashMap<>();
         if (optionalPerfume.isPresent()) {

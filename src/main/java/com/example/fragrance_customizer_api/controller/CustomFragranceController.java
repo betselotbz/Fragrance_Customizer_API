@@ -1,6 +1,7 @@
 package com.example.fragrance_customizer_api.controller;
 
 import com.example.fragrance_customizer_api.model.CustomFragrance;
+import com.example.fragrance_customizer_api.model.Perfume;
 import com.example.fragrance_customizer_api.service.CustomFragranceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,20 @@ public class CustomFragranceController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             message.put("message", "Cannot find any custom fragrance with the given ID.");
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/{note}")
+    public ResponseEntity<?> getCustomFragranceByNotes(@PathVariable String note) {
+        Optional<CustomFragrance> optionalCustomFragrance = customFragranceService.getCustomFragranceByNotes(note);
+        HashMap<String, Object> message = new HashMap<>();
+        if (optionalCustomFragrance.isPresent()) {
+            CustomFragrance customFragrance = optionalCustomFragrance.get();
+            message.put("message", "Success");
+            message.put("data", customFragrance );
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            message.put("message", "Cannot find any Custom Fragrance with the given note.");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
