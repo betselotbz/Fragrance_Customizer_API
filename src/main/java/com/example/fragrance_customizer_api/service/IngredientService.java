@@ -10,17 +10,11 @@ import java.util.Optional;
 
 @Service
 public class IngredientService {
-
-    private final List<Ingredient> ingredientList;
-
-    private IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
     @Autowired
-    public void setIngredientRepository(IngredientRepository ingredientRepository) {
+    public IngredientService(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
-    }
-    public IngredientService(List<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
     }
     public List<Ingredient> getAllIngredients() {return ingredientRepository.findAll();}
     public Optional<Ingredient> getIngredientByName(String name) {

@@ -54,17 +54,17 @@ public class PerfumeController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/{family}")
-    public ResponseEntity<?> getPerfumesByFamily(@PathVariable String family) {
-        Optional<Perfume> optionalPerfume = perfumeService.getPerfumesByFamily(family);
+    @GetMapping("/family/{family}")
+    public ResponseEntity<?> getPerfumeByFamily(@PathVariable String family) {
+        Optional<Perfume> optionalPerfume = perfumeService.getPerfumeByFamily(family);
         HashMap<String, Object> message = new HashMap<>();
         if (optionalPerfume.isPresent()) {
-           Perfume perfume = optionalPerfume.get();
+            Perfume perfume = optionalPerfume.get();
             message.put("message", "Success");
             message.put("data", perfume);
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
-            message.put("message", "Cannot find any Perfume with the given family.");
+            message.put("message", "Cannot find any perfume with the given family.");
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }

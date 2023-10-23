@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Represents an ingredient used in the formulation of a custom fragrance.
  *
  * Each instance of this class holds information about a specific ingredient, including its name,
- * amount, and an image. The class also manages the association with a custom fragrance through
+ * and an image. The class also manages the association with a custom fragrance through
  * the {@link CustomFragrance} entity.
  *
  */
@@ -29,14 +29,9 @@ public class Ingredient {
     private String name;
 
     /**
-     * The amount of the ingredient used in the formulation.
+     * The image of the ingredient used in the formulation.
      */
-    @Column
-    private String amount;
 
-    /**
-     * The image representing the ingredient.
-     */
     @Column
     private String image;
 
@@ -62,13 +57,11 @@ public class Ingredient {
      *
      * @param id     The unique identifier for the ingredient.
      * @param name   The name of the ingredient.
-     * @param amount The amount of the ingredient used in the formulation.
      * @param image  The image representing the ingredient.
      */
-    public Ingredient(Long id, String name, String amount, String image) {
+    public Ingredient(Long id, String name, String image) {
         this.id = id;
         this.name = name;
-        this.amount = amount;
         this.image = image;
 
     }
@@ -88,14 +81,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
     }
 
     public String getImage() {
@@ -124,7 +109,6 @@ public class Ingredient {
         return "Ingredient{" +
                 "id=" + id +
                 "name='" + name + '\'' +
-                ", amount='" + amount + '\'' +
                 ", image='" + image + '\'' +
                 ", customFragranceList=" + customFragranceList +
                 '}';

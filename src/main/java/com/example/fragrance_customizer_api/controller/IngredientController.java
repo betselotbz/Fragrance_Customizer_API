@@ -55,7 +55,7 @@ public class IngredientController {
         }
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<?> getIngredientByName(@PathVariable String name) {
             Optional<Ingredient> optionalIngredient = ingredientService.getIngredientByName(name);
             HashMap<String, Object> message = new HashMap<>();

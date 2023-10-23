@@ -1,8 +1,11 @@
 package definitions;
 
+import com.example.fragrance_customizer_api.FragranceCustomizerApiApplication;
+import com.example.fragrance_customizer_api.model.UserCartItem;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -11,11 +14,14 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+@CucumberContextConfiguration()
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FragranceCustomizerApiApplication.class)
 public class userCartItemTestDefs {
         private static final String BASE_URL = "http://localhost:";
         private final Logger logger = LoggerFactory.getLogger(definitions.userCartItemTestDefs.class);
@@ -82,16 +88,23 @@ public class userCartItemTestDefs {
             }
         }
 
-        @Given("a list of perfume are available in shopping list")
-        public void aListOfPerfumeAreAvailableInShoppingList() {
+    @Given("a list of items are available in shopping list")
+    public void aListOfItemsAreAvailableInShoppingList() {
             createRequest();
-            response = request.get(BASE_URL+ port +"/api/playlists/");
+        response = request.get(BASE_URL + port + "/api/user-cart-items/");
+        message = response.jsonPath().getString("message");
 
-            List<Playlist> playlists = response.jsonPath().get("data");
-            message = response.jsonPath().get("message");
-            Assert.assertEquals(HttpStatus.OK.value(),response.getStatusCode());
-            Assert.assertEquals("Success", message);
-            Assert.assertFalse(playlists.isEmpty());
-        }
+        // Assert that the request was successful
+        Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        Assert.assertEquals("Success", message);
 
+        // Extract user cart items from the response
+        List<UserCartItem> userCartItems = response.jsonPath().getList("data", UserCartItem.class);
+        System.out.println("userCartItems: " + userCartItems);
+        System.out.println("userCartItems.isEmpty(): " + userCartItems.isEmpty());
+
+        // Assert that the list is not null or empty
+        Assert.assertNotNull(userCartItems);
+        Assert.assertFalse(userCartItems.isEmpty());
+    }
 }

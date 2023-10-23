@@ -7,25 +7,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class PerfumeService {
-    private final List<Perfume> perfumeList;
-    private PerfumeRepository perfumeRepository;
+    private final PerfumeRepository perfumeRepository;
 
     @Autowired
-    public void setPerfumeRepository(PerfumeRepository perfumeRepository) {
+    public PerfumeService(PerfumeRepository perfumeRepository) {
         this.perfumeRepository = perfumeRepository;
     }
-    public PerfumeService(List<Perfume> perfumeList) {this.perfumeList = perfumeList;}
 
-    public List<Perfume> getAllPerfumes() {return perfumeRepository.findAll();}
-    public Optional<Perfume> getPerfumesByFamily(String family) {
+    public List<Perfume> getAllPerfumes() {
+        return perfumeRepository.findAll();
+    }
+
+    public Optional<Perfume> getPerfumeByFamily(String family) {
         return perfumeRepository.findByFamily(family);
     }
-    public Optional<Perfume> getPerfumesById(Long Id) {
-        return perfumeRepository.findById(Id);
+
+    public Optional<Perfume> getPerfumesById(Long id) {
+        return perfumeRepository.findById(id);
     }
-
 }
-
