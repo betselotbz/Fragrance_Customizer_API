@@ -1,5 +1,7 @@
 package com.example.fragrance_customizer_api.service;
 
+import com.example.fragrance_customizer_api.exception.InformationExistException;
+import com.example.fragrance_customizer_api.exception.InformationNotFoundException;
 import com.example.fragrance_customizer_api.model.User;
 import com.example.fragrance_customizer_api.model.UserCartItem;
 import com.example.fragrance_customizer_api.repository.UserCartItemRepository;
@@ -33,7 +35,11 @@ public class UserCartItemService {
     }
     //To get a specific item in User Cart
     public Optional<UserCartItem> getItemById(Long itemId){
-        return userCartItemRepository.findById(itemId);
+        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId);
+        if(optionalUserCartItem.isPresent()) {
+            return optionalUserCartItem;
+        }
+        throw new InformationNotFoundException("UserCartItem with Id " + itemId+ " not found");
     }
 
 
