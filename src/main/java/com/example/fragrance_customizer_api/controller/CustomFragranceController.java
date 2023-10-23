@@ -46,7 +46,7 @@ public class CustomFragranceController {
         if (optionalCustomFragrance.isPresent()) {
             CustomFragrance customFragrance = optionalCustomFragrance.get();
             message.put("message", "Success");
-            message.put("data", optionalCustomFragrance.get());
+            message.put("data", customFragrance);
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             message.put("message", "Cannot find any custom fragrance with the given ID.");

@@ -47,7 +47,7 @@ public class PerfumeController {
         if (optionalPerfume.isPresent()) {
             Perfume perfume = optionalPerfume.get();
             message.put("message", "Success");
-            message.put("data", optionalPerfume.get());
+            message.put("data", perfume);
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             message.put("message", "Cannot find any perfume with the given ID.");
