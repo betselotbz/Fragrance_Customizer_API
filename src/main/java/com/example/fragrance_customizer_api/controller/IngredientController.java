@@ -21,7 +21,9 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     @Autowired
-    public IngredientController(IngredientService ingredientService) { this.ingredientService = ingredientService; }
+    public IngredientController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<?> getAllIngredients() {
@@ -37,6 +39,7 @@ public class IngredientController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getIngredientById(@PathVariable Long id) {
         Optional<Ingredient> optionalIngredient = ingredientService.getIngredientById(id);
@@ -51,5 +54,20 @@ public class IngredientController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getIngredientByName(@PathVariable String name) {
+            Optional<Ingredient> optionalIngredient = ingredientService.getIngredientByName(name);
+            HashMap<String, Object> message = new HashMap<>();
+            if (optionalIngredient.isPresent()) {
+                Ingredient ingredient = optionalIngredient.get();
+                message.put("message", "Success");
+                message.put("data", ingredient);
+                return new ResponseEntity<>(message, HttpStatus.OK);
+            } else {
+                message.put("message", "Cannot find any Ingredient with the given name.");
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        }
 
 }
