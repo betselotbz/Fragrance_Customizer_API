@@ -35,12 +35,24 @@ public class UserCartItemService {
     }
     //To get a specific item in User Cart
     public Optional<UserCartItem> getItemById(Long itemId){
-        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId);
+        User curretUser = getCurrentLoggedInUser();
+        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId, curretUser);
         if(optionalUserCartItem.isPresent()) {
             return optionalUserCartItem;
         }
         throw new InformationNotFoundException("UserCartItem with Id " + itemId+ " not found");
     }
-
+    public UserCartItem deleteItem(Long itemId) {
+        User currentUser = getCurrentLoggedInUser();
+        Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findByIdAndUser(itemId, currentUser);
+        if (optionalUserCartItem.isPresent()) {
+            UserCartItem userCartItem = optionalUserCartItem.get();
+            userCartItemRepository.delete(userCartItem);
+            return userCartItem;
+        } else {
+            throw new InformationNotFoundException("You don't have an item with Id " + itemId);
+        }
+    }
 
 }
+
