@@ -25,7 +25,7 @@ public class Ingredient {
     /**
      * The name of the ingredient.
      */
-    @Column
+    @Column()
     private String name;
 
     /**
@@ -36,14 +36,15 @@ public class Ingredient {
     private String image;
 
     /**
-     * The custom fragrance to which this ingredient belongs.
-     *
-     * <p>Represents the many-to-one relationship between an ingredient and the custom fragrance it is part of.
-     * Cascades all operations (persist, remove, refresh, merge, detach) to the associated custom fragrance.</p>
-     *
+     * Represents the association of this entity with a CustomFragrance.
+     * This is a many-to-one relationship, indicating that multiple instances
+     * of this entity may be associated with a single CustomFragrance.
+     * The association is mapped to the 'customFragrance_id' column in the database.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    private CustomFragrance customFragranceList;
+    @ManyToOne
+    @JoinColumn(name = "customFragrance_id")
+    private CustomFragrance customFragrance;
+
 
     /**
      * Default constructor required for JPA.
@@ -55,15 +56,28 @@ public class Ingredient {
     /**
      * Constructs a new Ingredient with the given parameters.
      *
-     * @param id     The unique identifier for the ingredient.
-     * @param name   The name of the ingredient.
-     * @param image  The image representing the ingredient.
+     * @param id              The unique identifier for the ingredient.
+     * @param name            The name of the ingredient.
+     * @param image           The image representing the ingredient.
      */
     public Ingredient(Long id, String name, String image) {
         this.id = id;
         this.name = name;
         this.image = image;
+    }
 
+    /**
+     * Constructs a new Ingredient with the given parameters.
+     *
+     * @param id              The unique identifier for the ingredient.
+     * @param name            The name of the ingredient.
+     * @param image           The image representing the ingredient.
+     */
+    public Ingredient(Long id, String name, String image, CustomFragrance customFragrance) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.customFragrance = customFragrance;
     }
 
     // Getter and setter methods
@@ -90,13 +104,12 @@ public class Ingredient {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public CustomFragrance getCustomFragranceList() {
-        return customFragranceList;
+    public CustomFragrance getCustomFragrance() {
+        return customFragrance;
     }
 
-    public void setCustomFragranceList(CustomFragrance customFragranceList) {
-        this.customFragranceList = customFragranceList;
+    public void setCustomFragrance(CustomFragrance customFragrance) {
+        this.customFragrance = customFragrance;
     }
 
     /**
@@ -110,7 +123,6 @@ public class Ingredient {
                 "id=" + id +
                 "name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", customFragranceList=" + customFragranceList +
                 '}';
     }
 
