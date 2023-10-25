@@ -6,17 +6,15 @@ import com.example.fragrance_customizer_api.service.PerfumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/perfumes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PerfumeController {
     private final PerfumeService perfumeService;
 
@@ -26,46 +24,48 @@ public class PerfumeController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> getAllPerfumes() {
-        List<Perfume> perfumeList = perfumeService.getAllPerfumes();
-        HashMap<String, Object> message = new HashMap<>();
-
-        if (perfumeList.isEmpty()) {
-            message.put("message", "Cannot find any perfumes.");
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        } else {
-            message.put("message", "Success");
-            message.put("data", perfumeList);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+    public List<Perfume> getAllPerfumes(@RequestParam(value = "family", required = false) String family) {
+        if (family == null){
+            return perfumeService.getAllPerfumes();
         }
+        return perfumeService.getAllPerfumesByFamily(family);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPerfumesById(@PathVariable Long id) {
-        Optional<Perfume> optionalPerfume = perfumeService.getPerfumesById(id);
-        HashMap<String, Object> message = new HashMap<>();
-        if (optionalPerfume.isPresent()) {
-            Perfume perfume = optionalPerfume.get();
-            message.put("message", "Success");
-            message.put("data", perfume);
-            return new ResponseEntity<>(message, HttpStatus.OK);
-        } else {
-            message.put("message", "Cannot find any perfume with the given ID.");
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Perfume> getPerfumeById(@PathVariable Long id) {
+        return perfumeService.getPerfumeById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
     @GetMapping("/family/{family}")
-    public ResponseEntity<?> getPerfumeByFamily(@PathVariable String family) {
-        Optional<Perfume> optionalPerfume = perfumeService.getPerfumeByFamily(family);
-        HashMap<String, Object> message = new HashMap<>();
-        if (optionalPerfume.isPresent()) {
-            Perfume perfume = optionalPerfume.get();
-            message.put("message", "Success");
-            message.put("data", perfume);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+    public ResponseEntity<?> getAllPerfumesByFamily(@PathVariable String family) {
+        List<Perfume> perfumes = perfumeService.getAllPerfumesByFamily(family);
+        HashMap<String, Object> response = new HashMap<>();
+
+        if (perfumes.isEmpty()) {
+            response.put("message", "Cannot find any perfumes for the given family.");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } else {
-            message.put("message", "Cannot find any perfume with the given family.");
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            response.put("message", "Success");
+            response.put("data", perfumes);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
+    }
+
+    @PostMapping
+    public Perfume createPerfume(@RequestBody Perfume perfume) {
+        return perfumeService.createPerfume(perfume);
+    }
+
+    @PutMapping("/{id}")
+    public Perfume updatePerfume(@PathVariable Long id, @RequestBody Perfume perfume) {
+        perfume.setId(id);
+        return perfumeService.updatePerfume(perfume);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePerfume(@PathVariable Long id) {
+        perfumeService.deletePerfume(id);
+        return ResponseEntity.noContent().build();
     }
 }
