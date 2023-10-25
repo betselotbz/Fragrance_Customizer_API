@@ -1,8 +1,7 @@
 package com.example.fragrance_customizer_api.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Represents a perfume available on the website.
@@ -48,15 +47,8 @@ public class Perfume {
     @Column(nullable = false)
     private String image;
 
-    /**
-     * The list of user cart items associated with this perfume.
-     *
-     * <p>Represents the one-to-many relationship between a perfume and the user cart items related to it.
-     *  * Cascades all operations (persist, remove, refresh, merge, detach) to the associated user cart items.</p>
-     *
-     */
-    @OneToMany(mappedBy = "perfume", cascade = CascadeType.ALL)
-    private List<UserCartItem> userCartItems = new ArrayList<>();
+    @OneToMany(mappedBy = "perfume")
+    private Collection<UserCartItem> userCartItems;
 
     /**
      * Default constructor required for JPA.
@@ -121,12 +113,11 @@ public class Perfume {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public List<UserCartItem> getUserCartItems() {
+    public Collection<UserCartItem> getUserCartItems() {
         return userCartItems;
     }
 
-    public void setUserCartItems(List<UserCartItem> userCartItems) {
+    public void setUserCartItems(Collection<UserCartItem> userCartItems) {
         this.userCartItems = userCartItems;
     }
 
