@@ -1,4 +1,4 @@
-package com.example.fragrance_customizer_api.CorsConfig;
+package com.example.fragrance_customizer_api.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
