@@ -1,19 +1,18 @@
 package com.example.fragrance_customizer_api.controller;
 
 import com.example.fragrance_customizer_api.model.CustomFragrance;
-import com.example.fragrance_customizer_api.model.Perfume;
 import com.example.fragrance_customizer_api.service.CustomFragranceService;
+import com.example.fragrance_customizer_api.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
+
 
 @RestController
 @RequestMapping("api/custom-fragrance")
@@ -21,24 +20,14 @@ public class CustomFragranceController {
     private final CustomFragranceService customFragranceService;
 
     @Autowired
-    public CustomFragranceController(CustomFragranceService customFragranceService) {
+    public CustomFragranceController(CustomFragranceService customFragranceService, IngredientService ingredientService) {
         this.customFragranceService = customFragranceService;
     }
-
-    @GetMapping("/")
-    public ResponseEntity<?> getAllCustomFragrance() {
-        List<CustomFragrance> customFragranceList = customFragranceService.getAllCustomFragrance();
-        HashMap<String, Object> message = new HashMap<>();
-
-        if (customFragranceList.isEmpty()) {
-            message.put("message", "Cannot find any custom fragrances.");
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        } else {
-            message.put("message", "Success");
-            message.put("data", customFragranceList);
-            return new ResponseEntity<>(message, HttpStatus.OK);
-        }
+    @GetMapping
+    public List<CustomFragrance> getAllCustomFragrances() {
+        return customFragranceService.getAllCustomFragrances();
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomFragranceById(@PathVariable Long id) {
@@ -54,18 +43,39 @@ public class CustomFragranceController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/{note}")
-    public ResponseEntity<?> getCustomFragranceByNotes(@PathVariable String note) {
-        Optional<CustomFragrance> optionalCustomFragrance = customFragranceService.getCustomFragranceByNotes(note);
-        HashMap<String, Object> message = new HashMap<>();
-        if (optionalCustomFragrance.isPresent()) {
-            CustomFragrance customFragrance = optionalCustomFragrance.get();
-            message.put("message", "Success");
-            message.put("data", customFragrance );
-            return new ResponseEntity<>(message, HttpStatus.OK);
+
+    @PostMapping
+    public ResponseEntity<HashMap<String, Object>> createCustomFragrance(@RequestBody CustomFragrance customFragrance) {
+        CustomFragrance createdCustomFragrance = customFragranceService.createCustomFragrance(customFragrance);
+        HashMap<String, Object> response = new HashMap<>();
+
+        if (createdCustomFragrance != null) {
+            response.put("message", "Success");
+            response.put("data", createdCustomFragrance);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            message.put("message", "Cannot find any Custom Fragrance with the given note.");
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            response.put("message", "Failed to create custom fragrance.");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<HashMap<String, Object>> updateCustomFragrance(@PathVariable Long id, @RequestBody CustomFragrance customFragrance) {
+        customFragrance.setId(id);
+        CustomFragrance updatedCustomFragrance = customFragranceService.updateCustomFragrance(customFragrance);
+        HashMap<String, Object> response = new HashMap<>();
+
+        if (updatedCustomFragrance != null) {
+            response.put("message", "Success");
+            response.put("data", updatedCustomFragrance);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            response.put("message", "Cannot find any custom fragrance with the given ID.");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomFragrance(@PathVariable Long id) {
+        customFragranceService.deleteCustomFragrance(id);
+        return ResponseEntity.noContent().build();
     }
 }
