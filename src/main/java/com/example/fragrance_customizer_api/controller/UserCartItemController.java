@@ -24,6 +24,7 @@ public class UserCartItemController {
 
     private final HashMap<String, Object> response = new HashMap<>();
 
+
     @GetMapping("/")
     public ResponseEntity<?> getAllUserCartItems() {
         List<UserCartItem> userCartItemList = userCartItemService.getAllItemsForCurrentUser();
@@ -45,6 +46,21 @@ public class UserCartItemController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @PostMapping
+    public UserCartItem createItem(@RequestBody UserCartItem item) {
+        return userCartItemService.createItem(item);
+    }
+
+
+    // Update
+    @PutMapping
+    public UserCartItem updateItem(@RequestBody UserCartItem item) {
+        return userCartItemService.updateItem(item.getId(), item);
+    }
+
+
 
     @DeleteMapping ("/{itemId}")
     public ResponseEntity<?> deleteItemById(@PathVariable Long itemId) {
