@@ -20,11 +20,23 @@ public class PerfumeService {
         return perfumeRepository.findAll();
     }
 
-    public Optional<Perfume> getPerfumeByFamily(String family) {
-        return perfumeRepository.findByFamily(family);
+    public List<Perfume> getAllPerfumesByFamily(String family) {
+        return perfumeRepository.findAllByFamily(family);
     }
 
-    public Optional<Perfume> getPerfumesById(Long id) {
+    public Optional<Perfume> getPerfumeById(Long id) {
         return perfumeRepository.findById(id);
+    }
+
+    public Perfume createPerfume(Perfume perfume) {
+        return perfumeRepository.save(perfume);
+    }
+
+    public Perfume updatePerfume(Perfume perfume) {
+        return perfumeRepository.save(perfume);
+    }
+
+    public void deletePerfume(Long id) {
+        perfumeRepository.deleteById(id);
     }
 }
