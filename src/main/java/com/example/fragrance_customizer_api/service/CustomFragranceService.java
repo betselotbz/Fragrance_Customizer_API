@@ -10,20 +10,30 @@ import java.util.Optional;
 
 @Service
 public class CustomFragranceService {
-    private final List<CustomFragrance> customFragranceList;
 
     private CustomFragranceRepository customFragranceRepository;
     @Autowired
     public void setCustomFragranceRepository(CustomFragranceRepository customFragranceRepository) {
         this.customFragranceRepository = customFragranceRepository;
     }
-    public CustomFragranceService(List<CustomFragrance> customFragranceList) {this.customFragranceList = customFragranceList;}
-
-    public List<CustomFragrance> getAllCustomFragrance() {return customFragranceRepository.findAll();}
-
-    public Optional<CustomFragrance> getCustomFragranceByNotes(String notes) { return customFragranceRepository.findByNotes(notes);}
-    public Optional<CustomFragrance> getCustomFragranceByFamily(String family) { return customFragranceRepository.findByFamily(family);}
-    public Optional<CustomFragrance> getCustomFragranceById(Long Id) {
-        return customFragranceRepository.findById(Id);
+    public List<CustomFragrance> getAllCustomFragrances() {
+        return customFragranceRepository.findAll();
     }
+
+    public Optional<CustomFragrance> getCustomFragranceById(Long id) {
+        return customFragranceRepository.findById(id);
+    }
+
+    public CustomFragrance createCustomFragrance(CustomFragrance customFragrance) {
+        return customFragranceRepository.save(customFragrance);
+    }
+
+    public CustomFragrance updateCustomFragrance(CustomFragrance customFragrance) {
+        return customFragranceRepository.save(customFragrance);
+    }
+
+    public void deleteCustomFragrance(Long id) {
+        customFragranceRepository.deleteById(id);
+    }
+
 }
