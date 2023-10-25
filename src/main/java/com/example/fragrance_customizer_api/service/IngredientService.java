@@ -3,8 +3,10 @@ package com.example.fragrance_customizer_api.service;
 import com.example.fragrance_customizer_api.model.Ingredient;
 import com.example.fragrance_customizer_api.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,28 @@ public class IngredientService {
     public IngredientService(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
-    public List<Ingredient> getAllIngredients() {return ingredientRepository.findAll();}
-    public Optional<Ingredient> getIngredientByName(String name) {
-        return ingredientRepository.findByName(name);
+
+    public List<Ingredient> getAllIngredientsByName(String name) {
+        return ingredientRepository.findAllByName(name);
     }
-    public Optional<Ingredient> getIngredientById(Long Id) {
-        return ingredientRepository.findById(Id);
+
+    public List<Ingredient> getAllIngredients() {
+        return ingredientRepository.findAllByCustomFragranceIsNull();
+    }
+
+    public Optional<Ingredient> getIngredientById(Long id) {
+        return ingredientRepository.findById(id);
+    }
+
+    public Ingredient createIngredient(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    public Ingredient updateIngredient(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    public void deleteIngredient(Long id) {
+        ingredientRepository.deleteById(id);
     }
 }
