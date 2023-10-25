@@ -27,11 +27,25 @@ public class UserCartItemService {
         return myUserDetails.getUser();
 
     }
-    //To get all items in User Cart
+    public UserCartItem createItem(UserCartItem item) {
+        item.setUser(getCurrentLoggedInUser());  // Set user before saving
+        return userCartItemRepository.save(item);
+    }
     public List<UserCartItem> getAllItemsForCurrentUser() {
         User currentUser = getCurrentLoggedInUser();
         return userCartItemRepository.findByUser(currentUser);
     }
+
+    public UserCartItem updateItem(Long itemId, UserCartItem updatedItem) {
+        if (userCartItemRepository.findByIdAndUser(itemId, getCurrentLoggedInUser()).isPresent()) {
+            updatedItem.setId(itemId);  // Ensure the ID is set for the item to be updated
+            updatedItem.setUser(getCurrentLoggedInUser()); // Ensure the user remains the same
+            return userCartItemRepository.save(updatedItem);
+        } else {
+            throw new InformationNotFoundException("UserCartItem with Id " + itemId + " not found or does not belong to current user");
+        }
+    }
+
     //To get a specific item in User Cart
     public Optional<UserCartItem> getItemById(Long itemId){
         Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findById(itemId);
@@ -40,6 +54,7 @@ public class UserCartItemService {
         }
         throw new InformationNotFoundException("UserCartItem with Id " + itemId+ " not found");
     }
+
     public UserCartItem deleteItemById(Long itemId) {
         User currentUser = getCurrentLoggedInUser();
         Optional<UserCartItem> optionalUserCartItem = userCartItemRepository.findByIdAndUser(itemId, currentUser);
@@ -51,7 +66,6 @@ public class UserCartItemService {
             throw new InformationNotFoundException("You don't have an item with Id " + itemId);
         }
     }
-
 
 }
 

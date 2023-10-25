@@ -40,6 +40,18 @@ public class UserCartItem {
         this.user = user;
         this.perfume = perfume;
     }
+
+
+    /**
+     * @param id  The ID of the cart item.
+     * @param user The user associated with the cart item.
+     * @param customFragrance The customFragrance associated with the cart item.
+     */
+    public UserCartItem(Long id, User user, CustomFragrance customFragrance){
+        this.id = id;
+        this.user = user;
+        this.customFragrance = customFragrance;
+    }
     /**
      * Get the ID of the cart item.
      *
