@@ -64,27 +64,36 @@ public class SeedData implements CommandLineRunner {
         ingredientRepository.saveAll(ingredients);
 
         List<Perfume> perfumes = List.of(
-                new Perfume(null, "Chanel No. 5", "Floral", "Classic floral fragrance with notes of jasmine and rose.", "chanel_no5.jpg"),
-                new Perfume(null, "Dior J'adore", "Floral", "Elegant floral fragrance with notes of ylang-ylang and damask rose.", "dior_jadore.jpg"),
-                new Perfume(null, "Coco Chanel Mademoiselle", "Floral-Oriental", "Chic and modern fragrance with notes of orange, rose, and patchouli.", "coco_mademoiselle.jpg"),
-                new Perfume(null, "Tom Ford Black Orchid", "Oriental", "Luxurious and sensual fragrance with notes of black truffle, orchid, and vanilla.", "tom_ford_black_orchid.jpg"),
-                new Perfume(null, "Chloe Nomade", "Chypre", "A fresh and woody fragrance with notes of oak moss, mirabelle plum, and freesia.", "chloe_nomade.jpg"),
-                new Perfume(null, "Gucci Bloom", "Floral", "Captivating floral scent with notes of tuberose, jasmine, and Rangoon creeper.", "gucci_bloom.jpg"),
-                new Perfume(null, "Marc Jacobs Daisy", "Floral-Fruity", "Playful and youthful fragrance with notes of strawberry, violet, and jasmine.", "marc_jacobs_daisy.jpg"),
-                new Perfume(null, "Yves Saint Laurent Black Opium", "Oriental", "Bold and seductive fragrance with notes of coffee, vanilla, and white flowers.", "ysl_black_opium.jpg"),
-                new Perfume(null, "Creed Aventus", "Woody", "Iconic and masculine fragrance with notes of pineapple, birch, and ambergris.", "creed_aventus.jpg"),
-                new Perfume(null, "Jo Malone London Wood Sage & Sea Salt", "Woody-Aromatic", "Refreshing and earthy fragrance with notes of sea salt, sage, and ambrette seeds.", "jo_malone_wood_sage_sea_salt.jpg"),
-                new Perfume(null, "Prada Candy", "Oriental-Vanilla", "Sweet and indulgent fragrance with notes of caramel, musk, and vanilla.", "prada_candy.jpg"),
-                new Perfume(null, "Versace Bright Crystal", "Floral-Fruity", "Vibrant and fresh fragrance with notes of pomegranate, peony, and magnolia.", "versace_bright_crystal.jpg"),
-                new Perfume(null, "Calvin Klein Eternity", "Floral", "Timeless floral fragrance with notes of freesia, mandarin, and sandalwood.", "ck_eternity.jpg"),
-                new Perfume(null, "Bvlgari Omnia Crystalline", "Floral-Woody", "Elegant and luminous fragrance with notes of bamboo, lotus flower, and balsa wood.", "bvlgari_omnia_crystalline.jpg"),
-                new Perfume(null, "Ralph Lauren Romance", "Floral", "Romantic and feminine fragrance with notes of rose, chamomile, and ginger.", "ralph_lauren_romance.jpg"),
-                new Perfume(null, "Giorgio Armani Si", "Chypre", "Modern and sophisticated fragrance with notes of blackcurrant, vanilla, and musk.", "armani_si.jpg"),
-                new Perfume(null, "Tommy Hilfiger Tommy Girl", "Floral-Fruity", "Youthful and energetic fragrance with notes of apple blossom, camellia, and sandalwood.", "tommy_girl.jpg"),
-                new Perfume(null, "Dolce & Gabbana Light Blue", "Citrus", "Refreshing and iconic fragrance with notes of Sicilian lemon, apple, and bamboo.", "dg_light_blue.jpg"),
-                new Perfume(null, "Issey Miyake L'Eau d'Issey", "Floral-Aquatic", "Timeless and aquatic fragrance with notes of lotus, freesia, and cyclamen.", "issey_miyake_leau_dissey.jpg"),
-                new Perfume(null, "Kenzo Flower", "Floral", "Unique and powdery fragrance with notes of violet, vanilla, and rose.", "kenzo_flower.jpg")
-        );
+
+                new Perfume(null, "DIOR - J'adore", "Floral", "Elegant floral fragrance with notes of ylang-ylang and damask rose.", "https://www.sephora.com/productimages/sku/s1710060-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "GUCCI - Bloom", "Floral", "Captivating floral scent with notes of tuberose, jasmine, and Rangoon creeper.", "https://www.sephora.com/productimages/sku/s2541548-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "CALVIN KLEIN - Eternity", "Floral", "Timeless floral fragrance with notes of freesia, mandarin, and sandalwood.", "https://media.kohlsimg.com/is/image/kohls/5084368?wid=805&hei=805&op_sharpen=1"),
+                new Perfume(null, "GIORGIO ARMANI - My Way", "Floral", "a modern floral fragrance with notes of bergamot, orange blossom, tuberose, and vanilla", "https://www.sephora.com/productimages/sku/s2551091-main-zoom.jpg?imwidth=612"),
+
+
+                new Perfume(null, "TOM FORD - Black Orchid", "Oriental", "Luxurious and sensual fragrance with notes of black truffle, orchid, and vanilla.", "https://www.sephora.com/productimages/sku/s1007731-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "YVSL - Black Opium", "Oriental", "Bold and seductive fragrance with notes of coffee, vanilla, and white flowers.", "https://www.sephora.com/productimages/sku/s1698182-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "JIMMY CHOO - I Want Choo", "Oriental", "rich and warm notes, sometimes with a combination of floral, fruity, and spicy elements.", "https://www.sephora.com/productimages/sku/s2636215-main-zoom.jpg?imwidth=612"),
+
+
+                new Perfume(null, "CREED AVENTUS", "Woody", "Iconic and masculine fragrance with notes of pineapple, birch, and ambergris.", "https://images.bloomingdalesassets.com/is/image/BLM/products/7/optimized/12524077_fpx.tif?op_sharpen=1&wid=700&fit=fit,1&$filtersm$&fmt=webp"),
+                new Perfume(null, "VERONIQUE GABAI - Ready for Rose", "Woody", "Woody fragrance with notes of pineapple, birch, and ambergris, creating an iconic and masculine scent.", "https://cdn.scentbird.com/product/rebrand/img-3261-1.jpg?w=288&bgcolor=f7efe9"),
+                new Perfume(null, "MICHAEL KORS - Sexy Amber", "Woody", "Warm and inviting woody fragrance featuring rich amber and sandalwood notes for a luxurious and elegant scent.", "https://cdn.scentbird.com/product/rebrand/87.jpg?w=288&bgcolor=f7efe9"),
+                new Perfume(null, "AMBER - Rag & Bone", "Woody", "Alluring fragrance characterized by its rich and warm amber notes, delivering a sophisticated and enticing olfactory experience.", "https://cdn.scentbird.com/product/rebrand/img-2238-1.jpg?w=519&bgcolor=fff"),
+
+
+                new Perfume(null, "GIORGIO ARMANI - Acqua di Gioia", "Aquatic Fragrances", "A fresh and aquatic scent with notes of mint, lemon, and jasmine, inspired by nature's elements.", "https://www.sephora.com/productimages/sku/s1284249-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "DAVIDOFF - Cool Water", "Aquatic", "Fresh and oceanic, often containing marine notes.", "https://pimages.parfumo.de/720/36_img-1325-davidoff-cool-water-woman_720.jpg"),
+                new Perfume(null, "DOLCE & GABBANA - Light Blue", "Aquatic", "Refreshing and iconic fragrance with notes of Sicilian lemon, apple, and bamboo.", "https://www.sephora.com/productimages/sku/s1942804-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "CHANCE - Chanel", "Aquatic", "A vibrant and lively fragrance, blending floral and fruity notes for a fresh and playful scent that embodies the spirit of spontaneity and elegance.", "https://www.sephora.com/productimages/sku/s1001098-main-zoom.jpg?imwidth=612"),
+                new Perfume(null, "GIORGIO ARMANI - Ocean di Gioia", "Aquatic", "A fresh and floral fragrance featuring notes of lemon, pear, violet leaf, peony, jasmine, cedar, and cashmere wood, creating a harmonious and refreshing scent.", "https://www.sephora.com/productimages/sku/s2319440-main-zoom.jpg?imwidth=612"),
+
+                new Perfume(null, "BURBERRY - Her", "Sweet", "Playful blend of green almond and sugared almonds, offering a modern and sophisticated fragrance", "https://cdn.scentbird.com/product/rebrand/3.jpg?w=519&bgcolor=fff"),
+                new Perfume(null, "SIGNORINA - Salvatore Ferragamo", "Sweet", "Charming fragrance that combines fruity and floral notes, creating a graceful and feminine scent with a touch of sophistication.", "https://cdn.scentbird.com/product/rebrand/584.jpg?w=519&bgcolor=fff"),
+                new Perfume(null, "PRADA - Candy Florale", "Sweet", "Blend of citrus, limoncello, peony, musk, benzoin, caramel, honey, and powdery notes, combining a delicate bouquet for a soft and feminine allure.", "https://cdn.scentbird.com/product/rebrand/630.jpg?w=288&bgcolor=f7efe9"),
+                new Perfume(null, "JUICY COUTURE - Viva La Juicy Noir", "Sweet", "A blend of wild berries, honeysuckle, jasmine, caramel, vanilla, and sandalwood, creating a rich and seductive scent that's both sweet and alluring", "https://cdn.scentbird.com/product/rebrand/274.jpg?w=288&bgcolor=f7efe9")
+
+                );
 
         perfumeRepository.saveAll(perfumes);
 
