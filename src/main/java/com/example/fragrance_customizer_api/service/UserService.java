@@ -88,9 +88,10 @@ public class UserService {
      *
      * @throws ClassCastException If the user details in the security context cannot be cast to MyUserDetails.
      */
-    public static void getCurrentLoggedInUser() {
+    public static User getCurrentLoggedInUser() {
         MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         loggedinUser = userDetails.getUser();
+        return loggedinUser;
     }
 
     /**
