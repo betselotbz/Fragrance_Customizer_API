@@ -188,7 +188,8 @@ These acknowledgments reflect the collaborative and supportive nature of the dev
 ### Betselot Bezabeh
 
 
-<img src="src/main/resources/static/Betselot.jpg" height="100" alt="Picture of Gabrielle">
+<img src="src/main/resources/Static/Betselot.jpg" height="100" alt="Picture of Betselot">
 
-[<img src="src/main/resources/static/GithubIcon.png" height= "100" style="margin-bottom:-19px">](https://github.com/betselotbz)
-[<img src="src/main/resources/static/LinkedIn.png" height="50px" style="margin-right:10px">](http://www.linkedin.com/in/betselot-bezabeh-94643420a)
+[<img src="src/main/resources/Static/GithubIcon.png" height= "100" style="margin-bottom:-19px">](https://github.com/betselotbz)
+[<img src="src/main/resources/Static/LinkedIn.png" height="50px" style="margin-right:10px">](http://www.linkedin.com/in/betselot-bezabeh-94643420a)
+
