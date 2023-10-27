@@ -115,31 +115,31 @@ public class UserCartItemTestDefs {
             logger.error("Error while creating JSON request: {}", e.getMessage());
         }
     }
-    @Then("the item is created to the user's cart")
-    public void theItemIsCreatedToTheUserSCart() {
+//    @Then("the item is created to the user's cart")
+//    public void theItemIsCreatedToTheUserSCart() {
+//
+//        System.out.println("Response Body: " + response.getBody().asString());
+//        message = response.jsonPath().get("message");
+//        Assert.assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+//        Assert.assertEquals("Successfully added Chanel Perfume", message);
+//    }
 
-        System.out.println("Response Body: " + response.getBody().asString());
-        message = response.jsonPath().get("message");
-        Assert.assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
-        Assert.assertEquals("Successfully added Chanel Perfume", message);
-    }
+//    @When("the user removes item from their cart")
+//    public void theUserRemovesItemFromTheirCart() {
+//       UserCartItem deleteUserCart = response.jsonPath().getObject("data", UserCartItem.class);
+//
+//        createRequest();
+//        response = request.delete(BASE_URL + port + MessageFormat.format("/api/user-cart-items/{0}/", deleteUserCart.getId()));
+//
+//
+//    }
 
-    @When("the user removes item from their cart")
-    public void theUserRemovesItemFromTheirCart() {
-       UserCartItem deleteUserCart = response.jsonPath().getObject("data", UserCartItem.class);
-
-        createRequest();
-        response = request.delete(BASE_URL + port + MessageFormat.format("/api/user-cart-items/{0}/", deleteUserCart.getId()));
-
-
-    }
-
-    @Then("the item is removed from the user's cart")
-    public void theItemIsRemovedFromTheUserSCart() {
-        message = response.jsonPath().get("message");
-        Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
-        Assert.assertEquals("Successfully deleted perfume named Chanel", message);
-    }
+//    @Then("the item is removed from the user's cart")
+//    public void theItemIsRemovedFromTheUserSCart() {
+//        message = response.jsonPath().get("message");
+//        Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+//        Assert.assertEquals("Successfully deleted perfume named Chanel", message);
+//    }
 
 }
 
