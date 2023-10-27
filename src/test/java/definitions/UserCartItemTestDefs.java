@@ -18,13 +18,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 @CucumberContextConfiguration()
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = FragranceCustomizerApiApplication.class)
-public class userCartItemTestDefs {
+public class UserCartItemTestDefs {
         private static final String BASE_URL = "http://localhost:";
-        private final Logger logger = LoggerFactory.getLogger(definitions.userCartItemTestDefs.class);
+        private final Logger logger = LoggerFactory.getLogger(UserCartItemTestDefs.class);
         private static final String Base_URL = "http://localhost:";
         private static Response response;
         private String token;
@@ -88,23 +89,57 @@ public class userCartItemTestDefs {
             }
         }
 
-    @Given("a list of items are available in shopping list")
-    public void aListOfItemsAreAvailableInShoppingList() {
-            createRequest();
-        response = request.get(BASE_URL + port + "/api/user-cart-items/");
-        message = response.jsonPath().getString("message");
 
-        // Assert that the request was successful
+    @Given("a shopping cart is empty")
+    public void aShoppingCartIsEmpty() {
+        createRequest();
+        response = request.get(BASE_URL + port + "/api/user-cart-items/");
+
+        List<UserCartItem> userCartItems = response.jsonPath().getList("data", UserCartItem.class);
+        message = response.jsonPath().get("message");
         Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         Assert.assertEquals("Success", message);
-
-        // Extract user cart items from the response
-        List<UserCartItem> userCartItems = response.jsonPath().getList("data", UserCartItem.class);
-        System.out.println("userCartItems: " + userCartItems);
-        System.out.println("userCartItems.isEmpty(): " + userCartItems.isEmpty());
-
-        // Assert that the list is not null or empty
-        Assert.assertNotNull(userCartItems);
-        Assert.assertFalse(userCartItems.isEmpty());
+        Assert.assertTrue("User's cart is not empty", userCartItems.isEmpty());
     }
+
+    @When("the user adds item to their cart")
+    public void theUserAddsItemToTheirCart() {
+        try {
+            createRequest();
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("perfume", "Chanel");
+
+            response = request.body(requestBody.toString())
+                    .post(BASE_URL + port + "/api/user-cart-items/");
+        } catch (JSONException e) {
+            logger.error("Error while creating JSON request: {}", e.getMessage());
+        }
+    }
+    @Then("the item is created to the user's cart")
+    public void theItemIsCreatedToTheUserSCart() {
+
+        System.out.println("Response Body: " + response.getBody().asString());
+        message = response.jsonPath().get("message");
+        Assert.assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
+        Assert.assertEquals("Successfully added Chanel Perfume", message);
+    }
+
+    @When("the user removes item from their cart")
+    public void theUserRemovesItemFromTheirCart() {
+       UserCartItem deleteUserCart = response.jsonPath().getObject("data", UserCartItem.class);
+
+        createRequest();
+        response = request.delete(BASE_URL + port + MessageFormat.format("/api/user-cart-items/{0}/", deleteUserCart.getId()));
+
+
+    }
+
+    @Then("the item is removed from the user's cart")
+    public void theItemIsRemovedFromTheUserSCart() {
+        message = response.jsonPath().get("message");
+        Assert.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        Assert.assertEquals("Successfully deleted perfume named Chanel", message);
+    }
+
 }
+
