@@ -47,8 +47,12 @@ public class Perfume {
     @Column(nullable = false)
     private String image;
 
-    @OneToMany(mappedBy = "perfume")
-    private Collection<UserCartItem> userCartItems;
+
+    /**
+     * The price the perfume.
+     */
+    @Column(nullable = false)
+    private Double price;
 
     /**
      * Default constructor required for JPA.
@@ -65,12 +69,13 @@ public class Perfume {
      * @param notes Descriptive notes about the perfume.
      * @param image The image representing the perfume.
      */
-    public Perfume(Long id, String name, String family, String notes, String image) {
+    public Perfume(Long id, String name, String family, String notes, String image, Double price) {
         this.id = id;
         this.name = name;
         this.family = family;
         this.notes = notes;
         this.image = image;
+        this.price = price;
     }
 
     // Getter and setter methods
@@ -113,13 +118,7 @@ public class Perfume {
     public void setImage(String image) {
         this.image = image;
     }
-    public Collection<UserCartItem> getUserCartItems() {
-        return userCartItems;
-    }
 
-    public void setUserCartItems(Collection<UserCartItem> userCartItems) {
-        this.userCartItems = userCartItems;
-    }
 
     /**
      * Returns a string representation of the Perfume object.
@@ -135,5 +134,13 @@ public class Perfume {
                 ", notes='" + notes + '\'' +
                 ", image='" + image + '\'' +
                 '}';
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

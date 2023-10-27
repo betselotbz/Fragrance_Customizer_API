@@ -97,26 +97,4 @@ public class CustomFragrance {
                 ", notes='" + name + '\'' +
                 '}';
     }
-
-    @OneToMany(mappedBy = "customFragrance", fetch = FetchType.EAGER)
-    private Collection<Ingredient> ingredients;
-
-    public Collection<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Collection<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    @OneToMany(mappedBy = "customFragrance")
-    private Collection<UserCartItem> userCartItems;
-
-    public Collection<UserCartItem> getUserCartItems() {
-        return userCartItems;
-    }
-
-    public void setUserCartItems(Collection<UserCartItem> userCartItems) {
-        this.userCartItems = userCartItems;
-    }
 }
