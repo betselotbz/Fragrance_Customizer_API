@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static com.example.fragrance_customizer_api.service.UserService.getCurrentLoggedInUser;
 
 @RestController
 @RequestMapping("/api/user-cart-items")
@@ -27,6 +30,15 @@ public class UserCartItemController {
 
     @GetMapping("/")
     public ResponseEntity<?> getAllUserCartItems() {
+
+        User currentUser = getCurrentLoggedInUser();
+        if (Objects.equals(currentUser.getType(), "admin")){
+            List<UserCartItem> userCartItemList = userCartItemService.getAllItems();
+            response.put("data", userCartItemList);
+            response.put("message", "Success");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
         List<UserCartItem> userCartItemList = userCartItemService.getAllItemsForCurrentUser();
         response.put("data", userCartItemList);
         response.put("message", "Success");

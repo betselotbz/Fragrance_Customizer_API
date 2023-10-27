@@ -36,6 +36,10 @@ public class UserCartItemService {
         return userCartItemRepository.findByUser(currentUser);
     }
 
+    public List<UserCartItem> getAllItems() {
+        return userCartItemRepository.findAll();
+    }
+
     public UserCartItem updateItem(Long itemId, UserCartItem updatedItem) {
         if (userCartItemRepository.findByIdAndUser(itemId, getCurrentLoggedInUser()).isPresent()) {
             updatedItem.setId(itemId);  // Ensure the ID is set for the item to be updated
