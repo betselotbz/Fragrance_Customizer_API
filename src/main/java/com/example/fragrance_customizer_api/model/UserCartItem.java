@@ -22,6 +22,11 @@ public class UserCartItem {
     @ManyToOne
     @JoinColumn(name = "customFragrance_id")
     private CustomFragrance customFragrance;
+
+
+    @Column
+    private Long quantity;
+
     /**
      * Default constructor required for JPA.
      */
@@ -35,10 +40,11 @@ public class UserCartItem {
      * @param user    The user associated with the cart item.
      * @param perfume The perfume associated with the cart item.
      */
-    public UserCartItem(Long id, User user, Perfume perfume){
+    public UserCartItem(Long id, User user, Perfume perfume, Long quantity){
         this.id = id;
         this.user = user;
         this.perfume = perfume;
+        this.quantity = quantity;
     }
 
 
@@ -47,10 +53,11 @@ public class UserCartItem {
      * @param user The user associated with the cart item.
      * @param customFragrance The customFragrance associated with the cart item.
      */
-    public UserCartItem(Long id, User user, CustomFragrance customFragrance){
+    public UserCartItem(Long id, User user, CustomFragrance customFragrance, Long quantity){
         this.id = id;
         this.user = user;
         this.customFragrance = customFragrance;
+        this.quantity = quantity;
     }
     /**
      * Get the ID of the cart item.
@@ -129,5 +136,13 @@ public class UserCartItem {
                 ", perfume=" + perfume +
                 ", customFragrance=" + customFragrance +
                 '}';
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 }

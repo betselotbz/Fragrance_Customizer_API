@@ -29,9 +29,6 @@ public class User {
     @Column // user type can be admin or guest
     private String type;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<UserCartItem> userCartItems;
-
 
     /**
      * Default constructor needed for JPA.
@@ -135,13 +132,6 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
-    }
-    public Collection<UserCartItem> getUserCartItems() {
-        return userCartItems;
-    }
-
-    public void setUserCartItems(Collection<UserCartItem> userCartItems) {
-        this.userCartItems = userCartItems;
     }
 
     /**
