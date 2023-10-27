@@ -156,6 +156,7 @@ Fragrance Customizer API serves as the backend for the Fragrance Customizer plat
 
 - Spring Boot
 - Java
+- Angular
 - Postman
 - Spring Boot Dependencies
 - Testing Dependencies
@@ -179,7 +180,11 @@ Fragrance Customizer API serves as the backend for the Fragrance Customizer plat
     - Special thanks to my peers and collaborators who offered support, collaborated on problem-solving, and provided valuable insights. Working together made the development journey more enjoyable and productive.
 
 These acknowledgments reflect the collaborative and supportive nature of the development process, and I am grateful to everyone who contributed in various ways.
+
+
 <br>
+
+
 ### Betselot Bezabeh
 
 
